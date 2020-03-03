@@ -21,7 +21,7 @@ export class GoogleCalendarEventList extends React.Component {
     };
     render() {
         let events;
-        if (this.state.calendar.items === undefined || this.state.calendar.items.length == 0) {
+        if (this.state.calendar.items === undefined || this.state.calendar.items.length === 0) {
             events = <p>No events</p>;
         }
         else {

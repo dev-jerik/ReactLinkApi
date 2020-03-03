@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import {LINK_API_CLIENT_ID,
+    LINK_API_BASE_URL_API,
     LINK_API_BASE_URL} from "../ClientAppConstants";
 import Home from "./Home";
 
@@ -16,7 +17,7 @@ class Login extends React.Component {
     }
 
     componentWillMount() {
-        axios.defaults.baseURL = LINK_API_BASE_URL;
+        axios.defaults.baseURL = LINK_API_BASE_URL_API;
     }
     
     handleInputChange = (evt) => {
@@ -29,7 +30,7 @@ class Login extends React.Component {
         evt.preventDefault()
         const options = {
             url: "oauth/token",
-            baseURL: "http://localhost:8080/link",
+            baseURL: LINK_API_BASE_URL,
             method: "post",
             params: {
                 grant_type: "password",
