@@ -11,11 +11,9 @@ export class GoogleCalendarEventList extends React.Component {
         };
     }
     getGoogleCalendarEvents = () => {
-        console.log("Calendar: ");
         let url = "google/calendar/events?access_token=" + this.props.accessToken;
         axios.get(url)
             .then(response => {
-                console.log(response.data);
                 this.setState({ calendar: response.data });
             });
     };

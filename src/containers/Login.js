@@ -5,6 +5,7 @@ import {LINK_API_CLIENT_ID,
     LINK_API_BASE_URL} from "../ClientAppConstants";
 import Home from "./Home";
 
+
 class Login extends React.Component {
     constructor(props){
         super(props);
@@ -67,8 +68,18 @@ class Login extends React.Component {
                     <div>
                         <h3>Sign in</h3>
                         <form onSubmit={(evt) => {this.handleSubmitButton(evt)}}>
-                            <input type="text" name="username" value={this.state.username} placeholder="Username"  onChange={(evt) => {this.handleInputChange(evt)}} />
-                            <input type="password" value={this.state.password} name="password" placeholder="Password" onChange={(evt) => {this.handleInputChange(evt)}}/>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td><label>Username</label></td>
+                                        <td><input type="text" name="username" value={this.state.username} onChange={(evt) => {this.handleInputChange(evt)}} /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Password</label></td>
+                                        <td> <input type="password" value={this.state.password} name="password" onChange={(evt) => {this.handleInputChange(evt)}}/></td>
+                                    </tr>
+                                </tbody>
+                            </table>                           
                             <input type="submit" value="Login" />
                         </form>
                     </div>

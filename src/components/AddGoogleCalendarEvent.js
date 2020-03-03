@@ -1,5 +1,8 @@
 import React from 'react';
 import axios from 'axios';
+import DatePicker from "react-datepicker"; 
+import "react-datepicker/dist/react-datepicker.css";
+import { format } from 'date-fns'
 
 class AddGoogleCalendarEvent extends React.Component {
     constructor(props) {
@@ -9,10 +12,10 @@ class AddGoogleCalendarEvent extends React.Component {
                 summary: "",
                 description: "",
                 end: {
-                    date: ""
+                    date: format(new Date(), 'yyyy-MM-dd')
                 },
                 start: {
-                    date: ""
+                    date: format(new Date(), 'yyyy-MM-dd')
                 }
             }
         };
@@ -39,15 +42,13 @@ class AddGoogleCalendarEvent extends React.Component {
             }
         }));
     };
-    handleDateInputChange = evt => {
-        let name = evt.target.name;
-        let value = evt.target.value;
-        let dateField = { ...this.state.calendarEvent[name] };
-        dateField.date = value;
+    handleDateInputChange = (date, fieldName) => {
+        let dateField = { ...this.state.calendarEvent[fieldName] };
+        dateField.date = format(date, 'yyyy-MM-dd');
         this.setState(prevState => ({
             calendarEvent: {
                 ...prevState.calendarEvent,
-                [name]: dateField // update the value of specific key
+                [fieldName]: dateField // update the value of specific key
             }
         }));
     };
@@ -55,10 +56,38 @@ class AddGoogleCalendarEvent extends React.Component {
         return (<div>
             <h3>Add Calendar Event</h3>
             <form onSubmit={(evt) => { this.handleSubmitButton(evt); }}>
-                <input type="text" name="summary" value={this.state.calendarEvent.summary} placeholder="Summary" onChange={(evt) => { this.handleInputChange(evt); }} />
-                <input type="text" name="description" value={this.state.calendarEvent.description} placeholder="Description" onChange={(evt) => { this.handleInputChange(evt); }} />
-                <input type="text" name="start" value={this.state.calendarEvent.start.date} placeholder="Start Date (YYYY-MM-DD)" onChange={(evt) => { this.handleDateInputChange(evt); }} />
-                <input type="text" name="end" value={this.state.calendarEvent.end.date} placeholder="End Date (YYYY-MM-DD)" onChange={(evt) => { this.handleDateInputChange(evt); }} />
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><label>Summary</label></td>
+                            <td><input type="text" name="summary" required value={this.state.calendarEvent.summary} onChange={(evt) => { this.handleInputChange(evt); }} /></td>
+                        </tr>
+                        <tr>
+                            <td><label>Description</label></td>
+                            <td> <input type="text" name="description" required value={this.state.calendarEvent.description} onChange={(evt) => { this.handleInputChange(evt); }} /></td>
+                        </tr>
+                        <tr>
+                            <td><label>Start Date</label></td>
+                            <td>
+                                <DatePicker
+                                    dateFormat='yyyy-MM-dd'
+                                    value={this.state.calendarEvent.start.date}
+                                    onChange={(date) => { this.handleDateInputChange(date, "start"); }}
+                                    />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> <label>End Date</label></td>
+                            <td>
+                                <DatePicker
+                                    dateFormat='yyyy-MM-dd'
+                                    value={this.state.calendarEvent.end.date}
+                                    onChange={(date) => { this.handleDateInputChange(date, "end"); }}
+                                    />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>        
                 <input type="submit" value="Add" />
             </form>
             <br />
