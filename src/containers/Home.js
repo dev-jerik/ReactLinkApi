@@ -64,8 +64,6 @@ class Home extends React.Component {
                     clientId={this.props.googleClientId}
                     buttonText="CONNECT WITH GOOGLE"
                     responseType="code"
-                    uxMode='redirect'
-                    redirectUri="http://localhost:8080"
                     onSuccess={this.responseGoogle}
                     onFailure={this.responseGoogle} />
                 }
