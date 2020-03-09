@@ -25,7 +25,7 @@ class Home extends React.Component {
     responseGoogle = (response) => {
         if (response.code !== null) {
             console.log("Google Response: " + response.code);
-            let url = "google/save/accessToken?access_token="+this.props.accessToken+"&authCode="+response.code;
+            let url = "google/accesstoken/save?access_token="+this.props.accessToken+"&authCode="+response.code;
             axios.get(url)
             .then(response => {
                 console.log("Google Access Token" + response.data);

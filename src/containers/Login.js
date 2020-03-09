@@ -44,10 +44,10 @@ class Login extends React.Component {
         axios(options)
         .then(response => {
             let linkApiAccessToken = response.data.access_token;
-            axios.get("google/get/clientId?access_token="+response.data.access_token)
+            axios.get("google/thirdpartyapi/get?access_token="+response.data.access_token)
             .then(response => {
                 this.setState({accessToken: linkApiAccessToken,
-                    googleClientId: response.data})
+                    googleClientId: response.data.clientId})
             })
         })
         .catch(error => {

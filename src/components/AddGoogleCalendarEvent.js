@@ -22,7 +22,7 @@ class AddGoogleCalendarEvent extends React.Component {
     }
     handleSubmitButton = (evt) => {
         evt.preventDefault();
-        let url = "google/calendar/event/add?access_token=" + this.props.accessToken;
+        let url = "google/calendar/event/save?access_token=" + this.props.accessToken;
         axios.post(url, this.state.calendarEvent)
             .then(response => {
                 alert("Successfully added!");
